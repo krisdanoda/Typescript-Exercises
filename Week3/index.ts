@@ -21,37 +21,65 @@ class Person {
     }
 }
 
-let names: string[] = ["Miho", "Maho", "BzingerKing", "Wednesday", "Carole", "Garen", "Allah", "Vex", "Zoe", "Bob"]
+let names: string[] = ["Mihosha", "Maho", "BzingerKing", "Wednesday", "Carole", "Garen", "Allah", "Vex", "Zoe", "Bob"]
 let persons: Person[] = []
 
 
 names.map((name) => {
 
     let gender: string
-    if (getRandomInt(1) == 1)
+    if (getRandomInt(2) === 1)
         gender = "male"
     else gender = "female"
 
 
     persons.push(new Person(name, gender, getRandomInt(50)))
 })
-console.log(persons)
+console.log(persons )
 
+var sort: boolean = false
+var asc: number = -1
 
 function table(): string {
+    //sort
+
+    if (sort){
+         persons.sort((a, b)=> {
+             if (a.age <b.age){
+                 return asc
+             } else if (a.age > b.age){
+                 return -asc
+             } else {
+                 return 0
+             }
+         })
+    }
+
     var result: string = ""
+    result += "<table>"
+    persons.map((person) => {
 
-    persons.map( (person) => {
+            result += "<tr>"
+            result += "<td>" + person.name + "</td>"
+            result += "<td>" + person.age + "</td>"
+            result += "<td>" + person.gender + "</td>"
+            result += "</tr>"
 
-        result += "<tr>"
-        result += "<td>" + person.name + "</td>"
-        result += "</tr>"
-
-    })
-
+        }
+    )
+    result += "</table>"
+    console.log(result)
+    document.getElementById("root")!.innerHTML = result;
     return result;
 }
 
+function sortTable(){
+    sort = true;
+    asc = -1*asc
+    console.log("sorting")
+    document.getElementById("root")!.innerHTML = table();
+}
 
-document.getElementById("root")!.innerHTML = table();
+table()
+
 
