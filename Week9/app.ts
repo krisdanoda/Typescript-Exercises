@@ -1,4 +1,4 @@
-import * as dotenv from 'dotenv'
+import * as dotenv from "dotenv"
 dotenv.config({path:'./config.env'});
 import express = require("express");
 import morgan = require('morgan');
